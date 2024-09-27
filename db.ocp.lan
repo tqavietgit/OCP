@@ -1,0 +1,41 @@
+$TTL    604800
+@       IN      SOA     ocp-svc.ist.lan. contact.ist.lan (
+                  1     ; Serial
+             604800     ; Refresh
+              86400     ; Retry
+            2419200     ; Expire
+             604800     ; Minimum
+)
+        IN      NS      ocp-svc
+
+ocp-svc.ist.lan.          IN      A       10.0.101.1
+
+; Temp Bootstrap Node
+ocp-bootstrap.lab.ist.lan.        IN      A      10.0.101.10
+
+; Control Plane Nodes
+ocp-cp-1.lab.ist.lan.         IN      A      10.0.101.11
+ocp-cp-2.lab.ist.lan.         IN      A      10.0.101.12
+ocp-cp-3.lab.ist.lan.         IN      A      10.0.101.13
+
+; Worker Nodes
+ocp-w-1.lab.ist.lan.        IN      A      10.0.101.21
+ocp-w-2.lab.ist.lan.        IN      A      10.0.101.22
+
+; OpenShift Internal - Load balancer
+api.lab.ist.lan.        IN    A    10.0.101.1
+api-int.lab.ist.lan.    IN    A    10.0.101.1
+*.apps.lab.ist.lan.     IN    A    10.0.101.1
+
+; ETCD Cluster
+etcd-0.lab.ist.lan.    IN    A     10.0.101.11
+etcd-1.lab.ist.lan.    IN    A     10.0.101.12
+etcd-2.lab.ist.lan.    IN    A     10.0.101.13
+
+; OpenShift Internal SRV records (cluster name = lab)
+_etcd-server-ssl._tcp.lab.ist.lan.    86400     IN    SRV     0    10    2380    etcd-0.lab
+_etcd-server-ssl._tcp.lab.ist.lan.    86400     IN    SRV     0    10    2380    etcd-1.lab
+_etcd-server-ssl._tcp.lab.ist.lan.    86400     IN    SRV     0    10    2380    etcd-2.lab
+
+oauth-openshift.apps.lab.ist.lan.     IN     A     10.0.101.1
+console-openshift-console.apps.lab.ist.lan.     IN     A     10.0.101.1
